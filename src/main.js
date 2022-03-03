@@ -7,7 +7,12 @@ import store from './store';
 Vue.config.productionTip = false;
 
 Vue.use(Snotify, {
+  global: {
+    preventDuplicates: true,
+  },
   toast: {
+    timeout: 2000,
+    showProgressBar: false,
     position: 'rightTop',
   },
 });
