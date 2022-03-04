@@ -1,5 +1,6 @@
 <template>
-  <div class="deneme">
+  <div class="container-xxl">
+    <div>{{productQuantity}}</div>
     <div class="d-flex flex-wrap p-1">
       <div v-for="el in productsList" :key="el.id" class="card m-2" style="width: 18rem;">
         <div class="card-body">
@@ -10,7 +11,7 @@
               {{el.price}} TL
             </div>
             <div class="col">
-              <button class="btn btn-warning" @click="addBasket">Add Basket</button>
+              <button class="btn btn-warning" @click="addToCart(el)">Add Basket</button>
             </div>
           </div>
         </div>
@@ -26,7 +27,7 @@ export default {
   name: 'ProductsList',
   data() {
     return {
-      baseUrl: 'http://localhost:3001/productsLists',
+      baseUrl: 'http://localhost:3001/productsList',
       productsList: [],
     };
   },
@@ -37,14 +38,14 @@ export default {
     async getPeople() {
       try {
         const r = await axios.get(this.baseUrl);
-        console.log(r);
         this.productsList = r.data;
       } catch (e) {
-        console.error(e);
+        this.$snotify.error('Bir Hata Oluştu');
       }
     },
-    addBasket() {
-      this.$snotify.success('Başarılı');
+    addToCart(product) {
+      this.$store.commit('addToCart', product);
+      this.$snotify.success('Ürün Sepete Eklendi');
     },
   },
 };
