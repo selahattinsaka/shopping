@@ -1,7 +1,7 @@
 <template>
-  <div v-if="products.length" class="mt-2 basket">
-    <div class="p-1 basket-container">
-      <div v-for="el in products" :key="el.id" class="card m-2 card-size">
+  <div v-if="products.length" class="mt-2">
+    <div class="d-flex flex-wrap p-1 basket-container">
+      <div v-for="el in products" :key="el.id" class="card m-2" style="width: 33rem;">
         <div class="card-body">
           <div class="row">
             <div class="col">
@@ -32,7 +32,9 @@
       <button type="button" class="btn btn-warning">Sipariş Ver</button>
     </div>
   </div>
-  <div v-else>Sepet Boş</div>
+  <div v-else>
+    Sepet Boş
+  </div>
 </template>
 
 <script>
@@ -63,15 +65,4 @@ export default {
 </script>
 
 <style lang="scss">
-  .basket {
-    .card-size {
-      width: 32rem;
-    }
-     @media(min-width: 1140px) {
-      // max-width: 1140px;
-      .card-size {
-        // width: 20rem;
-      }
-    }
-  }
 </style>

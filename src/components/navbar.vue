@@ -1,5 +1,5 @@
 <template>
-  <header :class="{ 'scrolled-nav': scroolPosition}">
+  <header>
     <nav>
       <ul v-show="!mobile" class="navigation">
         <li>
@@ -13,15 +13,13 @@
           <fa-icon icon="bars" :class="{ 'icon-active': mobileNav}" class="fa-icon"/>
         </span>
       </div>
-      <transition name="mobile-nav">
-        <ul v-show="mobileNav" class="dropdown-nav">
-          <li>
-            <router-link class="link" :to="{ name: 'Home'}">Home</router-link>
-          </li>
-          <li>
-            <router-link class="link" :to="{ name: 'Basket'}">Basket ( {{productTotal ? productTotal.length : 0}} )</router-link></li>
-        </ul>
-      </transition>
+      <ul v-show="mobileNav" class="dropdown-nav">
+        <li>
+          <router-link class="link" :to="{ name: 'Home'}">Home</router-link>
+        </li>
+        <li>
+          <router-link class="link" :to="{ name: 'Basket'}">Basket ( {{productTotal ? productTotal.length : 0}} )</router-link></li>
+      </ul>
     </nav>
   </header>
 </template>
@@ -126,7 +124,7 @@ header {
       }
 
       .icon-active {
-        transform: rotata(180deg)
+        transform: rotate(180deg)
       }
       .dropdown-nav {
         display: flex;
