@@ -1,6 +1,6 @@
 <template>
   <div v-if="products.length" class="mt-2">
-    <div class="d-flex flex-wrap p-1 basket-container">
+    <div class="p-1 basket-container">
       <div v-for="el in products" :key="el.id" class="card m-2" style="width: 33rem;">
         <div class="card-body">
           <div class="row">
@@ -53,6 +53,7 @@ export default {
   methods: {
     removeProduct(product) {
       this.$store.commit('removeFromCart', product);
+      this.$snotify.success('Ürün Sepetten Kaldırıldı');
     },
     decreaseQuantity(product) {
       this.$store.commit('decreaseQuantity', product);
