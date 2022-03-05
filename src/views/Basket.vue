@@ -1,5 +1,19 @@
 <template>
   <div>
-    <h1>Basket Page</h1>
+    <basket-list/>
   </div>
 </template>
+
+<script>
+
+import BasketList from '../components/basketList.vue';
+
+export default {
+  name: 'Basket',
+  components: { BasketList },
+};
+</script>
+
+<style>
+
+</style>

@@ -1,3 +1,18 @@
 .img-size {
   width: 200px;
 }
+.basket-container {
+  height: calc(100vh - 180px);
+  width: 50%;
+  overflow: auto;
+}
+.product-container {
+  height: calc(100vh - 110px);
+  overflow: auto;
+}
+.basket-remove {
+  cursor: pointer;
+  &:hover {
+    color: red;
+  }
+}

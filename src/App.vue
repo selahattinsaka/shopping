@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <navbar @rerender-page="rerender"/>
-    </div>
+    <navbar @rerender-page="rerender"/>
     <router-view/>
     <vue-snotify/>
   </div>

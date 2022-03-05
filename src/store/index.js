@@ -3,10 +3,6 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-function updateLocalStorage(cart) {
-  localStorage.setItem('cart', JSON.stringify(cart));
-}
-
 export default new Vuex.Store({
   state: {
     cart: [],
@@ -20,7 +16,28 @@ export default new Vuex.Store({
         state.cart.push({ ...product, quantity: 1 });
       }
 
-      updateLocalStorage(state.cart);
+      localStorage.setItem('cart', JSON.stringify(state.cart));
+    },
+    removeFromCart(state, product) {
+      const item = state.cart.find((el) => el.id === product.id);
+      if (item) {
+        state.cart = state.cart.filter((e) => e.id !== product.id);
+      }
+      localStorage.setItem('cart', JSON.stringify(state.cart));
+    },
+    decreaseQuantity(state, product) {
+      const item = state.cart.find((el) => el.id === product.id);
+      if (item.quantity === 1) {
+        state.cart = state.cart.filter((e) => e.id !== product.id);
+      } else {
+        item.quantity -= 1;
+      }
+      localStorage.setItem('cart', JSON.stringify(state.cart));
+    },
+    increaseQuantity(state, product) {
+      const item = state.cart.find((el) => el.id === product.id);
+      item.quantity += 1;
+      localStorage.setItem('cart', JSON.stringify(state.cart));
     },
   },
   actions: {

@@ -1,52 +1,151 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div id="navbarNav" class="collapse navbar-collapse">
-        <ul v-for="el in navbarList" :key="el.id" class="navbar-nav">
-          <li class="nav-item">
-            <router-link
-              :to="{ name: el.routerName}"
-              :class="{'nav-link active': el.active}"
-              class="me-2 text-decoration-none"
-              @click="checkNavBar(el)">
-              {{el.name}}
-              <span v-if="el.routerName === 'Basket'">( {{($store.state.cart).length}} )</span>
-            </router-link>
-          </li>
-        </ul>
+  <header :class="{ 'scrolled-nav': scroolPosition}">
+    <nav>
+      <ul v-show="!mobile" class="navigation">
+        <li>
+          <router-link class="link" :to="{ name: 'Home'}">Home</router-link>
+        </li>
+        <li>
+          <router-link class="link" :to="{ name: 'Basket'}">Basket ( {{productTotal ? productTotal.length : 0}} )</router-link></li>
+      </ul>
+      <div class="icon">
+        <span v-show="mobile" @click="toggleMobile">
+          <fa-icon icon="bars" :class="{ 'icon-active': mobileNav}" class="fa-icon"/>
+        </span>
       </div>
-    </div>
-  </nav>
+      <transition name="mobile-nav">
+        <ul v-show="mobileNav" class="dropdown-nav">
+          <li>
+            <router-link class="link" :to="{ name: 'Home'}">Home</router-link>
+          </li>
+          <li>
+            <router-link class="link" :to="{ name: 'Basket'}">Basket ( {{productTotal ? productTotal.length : 0}} )</router-link></li>
+        </ul>
+      </transition>
+    </nav>
+  </header>
 </template>
 
 <script>
 export default {
-  name: 'Navbar',
+  name: 'navbar',
   data() {
     return {
-      navbarList: [
-        { name: 'Home', active: false, routerName: 'Home' },
-        { name: 'Basket', active: false, routerName: 'Basket' },
-      ],
+      scroolPosition: undefined,
+      mobile: undefined,
+      mobileNav: undefined,
+      windowWidth: undefined,
     };
   },
-  methods: {
-    checkNavBar(selected) {
-      const temp1 = selected;
-      this.navbarList.forEach((el) => {
-        const temp = el;
-        temp.active = false;
-      });
-      temp1.active = true;
+  computed: {
+    productTotal() {
+      return this.$store.state.cart || JSON.parse(localStorage.getItem('cart'));
     },
   },
-
+  created() {
+    window.addEventListener('resize', this.checkScreen);
+    this.checkScreen();
+  },
+  methods: {
+    toggleMobile() {
+      this.mobileNav = !this.mobileNav;
+    },
+    checkScreen() {
+      this.windowWidth = window.innerWidth;
+      if (this.windowWidth <= 750) {
+        this.mobile = true;
+      } else {
+        this.mobile = false;
+        this.mobileNav = false;
+      }
+    },
+  },
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+header {
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 99;
+  width: 100%;
+  position: relative;
+  transition: 0.5s ease all;
+  color: #fff;
+    nav {
+    // position: relative;
+    display: flex;
+    flex-direction: row;
+    padding: 12px 0;
+    transition: .5s ease all;
+    width: 90%;
+    margin: 0 auto;
+    @media(min-width: 1140px) {
+      max-width: 1140px;
+    }
+      ul,
+      .link {
+        font-weight: 500;
+        color: #fff;
+        list-style: none;
+        text-decoration: none;
+      }
+      li {
+        text-transform: uppercase;
+        padding: 16px;
+        margin-left: 16px;
+      }
+
+      .navigation {
+        display: flex;
+        align-items: center;
+        flex: 1;
+      }
+      .link {
+        font-size: 14px;
+        transition: .5s ease all;
+        padding-bottom: 4px;
+        border-bottom: 1px solid transparent;
+          &:hover {
+          color: #00afea;
+          border-color: #00afea;
+      }
+      }
+
+      .icon {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        right: 24px;
+        height: 100%;
+      }
+      .fa-icon {
+        cursor: pointer;
+        font-size: 24px;
+        transition: 0.8s ease all;
+      }
+
+      .icon-active {
+        transform: rotata(180deg)
+      }
+      .dropdown-nav {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        width: 100%;
+        max-width: 250px;
+        height: 100%;
+        background-color: #fff;
+        top: 0;
+        left: 0;
+        li {
+          margin-left: 0;
+          .link {
+            color: #000;
+          }
+        }
+      }
+  }
+}
 
 </style>
