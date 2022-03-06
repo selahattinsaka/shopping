@@ -31,10 +31,10 @@ export default {
     };
   },
   mounted() {
-    this.getPeople();
+    this.getProducts();
   },
   methods: {
-    async getPeople() {
+    async getProducts() {
       try {
         const r = await axios.get(this.baseUrl);
         this.productsList = r.data;
@@ -42,8 +42,9 @@ export default {
         this.$snotify.error('Bir Hata Oluştu');
       }
     },
-    addToCart(product) {
+    async addToCart(product) {
       this.$store.commit('addToCart', product);
+      this.$router.push({ name: 'Basket' });
       this.$snotify.success('Ürün Sepete Eklendi');
     },
   },

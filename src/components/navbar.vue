@@ -2,11 +2,11 @@
   <header>
     <nav>
       <ul v-show="!mobile" class="navigation">
-        <li>
-          <router-link class="link" :to="{ name: 'Home'}">Home</router-link>
+        <li v-for="el in routerList" :key="el.id" @click="checkNavBar(el)">
+          <router-link class="link" :class="{'clicked-link': el.isActive}" :to="{ name: el.routeName}">
+            {{el.name}} {{el.routeName === 'Basket' ? productTotal ? `( ${productTotal.length} )` : 0 : ''}}
+          </router-link>
         </li>
-        <li>
-          <router-link class="link" :to="{ name: 'Basket'}">Basket ( {{productTotal ? productTotal.length : 0}} )</router-link></li>
       </ul>
       <div class="icon">
         <span v-show="mobile" @click="toggleMobile">
@@ -14,11 +14,11 @@
         </span>
       </div>
       <ul v-show="mobileNav" class="dropdown-nav">
-        <li>
-          <router-link class="link" :to="{ name: 'Home'}">Home</router-link>
+        <li v-for="el in routerList" :key="el.id" @click="checkNavBar(el)">
+          <router-link class="link" :class="{'clicked-link': el.isActive}" :to="{ name: el.routeName}">
+            {{el.name}} {{el.routeName === 'Basket' ? productTotal ? `( ${productTotal.length} )` : 0 : ''}}
+          </router-link>
         </li>
-        <li>
-          <router-link class="link" :to="{ name: 'Basket'}">Basket ( {{productTotal ? productTotal.length : 0}} )</router-link></li>
       </ul>
     </nav>
   </header>
@@ -33,6 +33,10 @@ export default {
       mobile: undefined,
       mobileNav: undefined,
       windowWidth: undefined,
+      routerList: [
+        { routeName: 'Home', name: 'Products', isActive: true },
+        { routeName: 'Basket', name: 'My Cart', isActive: false },
+      ],
     };
   },
   computed: {
@@ -45,6 +49,14 @@ export default {
     this.checkScreen();
   },
   methods: {
+    checkNavBar(selected) {
+      const temp1 = selected;
+      this.routerList.forEach((el) => {
+        const temp = el;
+        temp.isActive = false;
+      });
+      temp1.isActive = true;
+    },
     toggleMobile() {
       this.mobileNav = !this.mobileNav;
     },

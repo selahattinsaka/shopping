@@ -7,9 +7,9 @@
             <div class="col">
               <div class="ms-1 text-center mb-1"><img class="img-size" :src="el.image"></div>
               <div class="d-flex justify-content-center">
-                <button class="btn btn-primary me-2 rounded-circle test" @click="decreaseQuantity(el)">-</button>
+                <button :disabled="el.quantity === 1" class="btn btn-primary me-2 rounded-circle test" @click="decreaseQuantity(el)">-</button>
                 <input v-model="el.quantity" type="text" class="form-control text-center" style="width: 20%">
-                <button :disabled="el.quantity === 1" class="btn btn-primary ms-2 rounded-circle" @click="increaseQuantity(el)">+</button>
+                <button class="btn btn-primary ms-2 rounded-circle" @click="increaseQuantity(el)">+</button>
               </div>
             </div>
             <div class="col">
@@ -29,7 +29,7 @@
     </div>
     <div class="d-flex justify-content-center mt-3" >
       <button type="button" class="btn btn-light me-3" @click="$router.push({ name: 'Home' })">Alışverişe Devam Et</button>
-      <button type="button" class="btn btn-warning">Sipariş Ver</button>
+      <button type="button" class="btn btn-warning" @click="giveOrder">Sipariş Ver</button>
     </div>
   </div>
   <div v-else>
@@ -38,11 +38,15 @@
 </template>
 
 <script>
+
+import axios from 'axios';
+
 export default {
   name: 'basketList',
   data() {
     return {
       basketList: JSON.parse(localStorage.getItem('cart')),
+      baseUrl: 'http://localhost:3001/ordered',
     };
   },
   computed: {
@@ -60,6 +64,22 @@ export default {
     },
     increaseQuantity(product) {
       this.$store.commit('increaseQuantity', product);
+    },
+    async giveOrder() {
+      const orderedProducts = [];
+      const data = JSON.parse(localStorage.getItem('cart'));
+      data.forEach((el) => {
+        orderedProducts.push({
+          id: el.id,
+          quantity: el.quantity,
+        });
+      });
+      try {
+        await axios.post(this.baseUrl, orderedProducts);
+        this.$snotify.success('Siparişiniz Verildi');
+      } catch (e) {
+        this.$snotify.error('Bir Hata Oluştu');
+      }
     },
   },
 };
