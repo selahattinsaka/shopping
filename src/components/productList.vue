@@ -1,7 +1,7 @@
 <template>
-  <div class="container-xxl">
-    <div class="d-flex flex-wrap p-1 product-container">
-      <div v-for="el in productsList" :key="el.id" class="card m-2" style="width: 18rem;">
+  <div class="container-xxl product-container">
+    <div class="d-flex flex-wrap p-1">
+      <div v-for="el in productsList" :key="el.id" class="card m-2 product-card" style="width: 18rem;">
         <div class="card-body">
           <div class="ms-1 text-center mb-1"><img class="img-size" :src="el.image"></div>
           <h5 class="card-title text-center">{{el.name}}</h5>

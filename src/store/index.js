@@ -27,11 +27,7 @@ export default new Vuex.Store({
     },
     decreaseQuantity(state, product) {
       const item = state.cart.find((el) => el.id === product.id);
-      if (item.quantity === 1) {
-        state.cart = state.cart.filter((e) => e.id !== product.id);
-      } else {
-        item.quantity -= 1;
-      }
+      item.quantity -= 1;
       localStorage.setItem('cart', JSON.stringify(state.cart));
     },
     increaseQuantity(state, product) {

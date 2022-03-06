@@ -7,9 +7,9 @@
             <div class="col">
               <div class="ms-1 text-center mb-1"><img class="img-size" :src="el.image"></div>
               <div class="d-flex justify-content-center">
-                <button class="btn btn-primary me-2 rounded-circle" @click="increaseQuantity(el)">+</button>
+                <button class="btn btn-primary me-2 rounded-circle test" @click="decreaseQuantity(el)">-</button>
                 <input v-model="el.quantity" type="text" class="form-control text-center" style="width: 20%">
-                <button class="btn btn-primary ms-2 rounded-circle" @click="decreaseQuantity(el)">-</button>
+                <button :disabled="el.quantity === 1" class="btn btn-primary ms-2 rounded-circle" @click="increaseQuantity(el)">+</button>
               </div>
             </div>
             <div class="col">
