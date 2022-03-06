@@ -16,7 +16,7 @@ Vue.use(Snotify, {
     preventDuplicates: true,
   },
   toast: {
-    timeout: 2000,
+    timeout: 500,
     showProgressBar: false,
     position: 'rightTop',
   },
