@@ -22,3 +22,19 @@
 .clicked-link {
   color: #00afea !important;
 }
+.basket-list-button {
+  position: relative;
+  border-radius: 50% !important;
+  background-color: #F8F9F9 !important;
+  border-color: #E5E7E9 !important;
+  width: 25px;
+  height: 25px;
+  .increase-button {
+    left: 7px;
+    bottom: 1px
+  }
+  .decrease-button {
+    left: 8px;
+    bottom: 1px
+  }
+}

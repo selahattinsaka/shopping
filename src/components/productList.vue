@@ -4,14 +4,12 @@
       <div v-for="el in productsList" :key="el.id" class="card m-2 product-card" style="width: 18rem;">
         <div class="card-body">
           <div class="ms-1 text-center mb-1"><img class="img-size" :src="el.image"></div>
-          <h5 class="card-title text-center">{{el.name}}</h5>
-          <div class="row">
-            <div class="col">
-              {{el.price}} TL
-            </div>
-            <div class="col">
-              <button class="btn btn-warning" @click="addToCart(el)">Add Basket</button>
-            </div>
+          <p class="card-title text-center mb-3 fst-italic">{{el.name}}</p>
+          <div class="d-flex">
+            <div class="mt-2 me-auto fs-5">{{el.price}} TL</div>
+            <button class="btn btn-warning" @click="addToCart(el)">
+              <span>Add Basket</span>
+            </button>
           </div>
         </div>
       </div>

@@ -7,9 +7,13 @@
             <div class="col">
               <div class="ms-1 text-center mb-1"><img class="img-size" :src="el.image"></div>
               <div class="d-flex justify-content-center">
-                <button :disabled="el.quantity === 1" class="btn btn-primary me-2 rounded-circle test" @click="decreaseQuantity(el)">-</button>
+                <button :disabled="el.quantity === 1" class="btn btn-light me-2 mt-2 basket-list-button" @click="decreaseQuantity(el)">
+                  <div class="position-absolute decrease-button">-</div>
+                </button>
                 <input v-model="el.quantity" type="text" class="form-control text-center" style="width: 20%">
-                <button class="btn btn-primary ms-2 rounded-circle" @click="increaseQuantity(el)">+</button>
+                <button class="btn btn-light ms-2 mt-2 basket-list-button" @click="increaseQuantity(el)">
+                  <div class="position-absolute increase-button">+</div>
+                </button>
               </div>
             </div>
             <div class="col">
@@ -28,8 +32,10 @@
       </div>
     </div>
     <div class="d-flex justify-content-center mt-3" >
-      <button type="button" class="btn btn-light me-3" @click="$router.push({ name: 'Home' })">Alışverişe Devam Et</button>
-      <button type="button" class="btn btn-warning" @click="giveOrder">Sipariş Ver</button>
+      <button type="button" class="btn btn-light me-3" @click="$router.push({ name: 'Home' })">
+        <span class="fs-6">CONTINUE SHOPPING</span>
+      </button>
+      <button type="button" class="btn btn-warning" @click="giveOrder">PLACE ORDER</button>
     </div>
   </div>
   <div v-else>

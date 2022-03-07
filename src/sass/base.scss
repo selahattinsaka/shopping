@@ -1,2 +1,14 @@
 @import "~bootstrap/scss/bootstrap.scss";
 @import "shopping.scss";
+  // override for bootstrap classes
+.btn-warning {
+  background-color: #FF7133;
+  border-color: #FF7133;
+  color: #fff;
+}
+.btn {
+  border-radius: 0;
+}
+.form-control {
+  border-radius: 0;
+}
