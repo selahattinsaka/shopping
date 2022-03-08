@@ -4,7 +4,7 @@
       <ul v-show="!mobile" class="navigation">
         <li v-for="el in routerList" :key="el.id" @click="checkNavBar(el)">
           <router-link class="link" :class="{'clicked-link': el.isActive}" :to="{ name: el.routeName}">
-            {{el.name}} {{el.routeName === 'Basket' ? productTotal ? `( ${productTotal.length} )` : 0 : ''}}
+            {{el.name}} {{el.routeName === 'Basket' ? productTotal ? `( ${productTotal.length} )` : '( 0 )' : ''}}
           </router-link>
         </li>
       </ul>
@@ -16,7 +16,7 @@
       <ul v-show="mobileNav" class="dropdown-nav">
         <li v-for="el in routerList" :key="el.id" @click="checkNavBar(el)">
           <router-link class="link" :class="{'clicked-link': el.isActive}" :to="{ name: el.routeName}">
-            {{el.name}} {{el.routeName === 'Basket' ? productTotal ? `( ${productTotal.length} )` : 0 : ''}}
+            {{el.name}} {{el.routeName === 'Basket' ? productTotal ? `( ${productTotal.length} )` : '( 0 )' : ''}}
           </router-link>
         </li>
       </ul>
