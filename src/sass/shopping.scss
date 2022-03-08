@@ -1,12 +1,14 @@
 .img-size {
-  width: 130px;
+  width: 100%;
+  max-width: 130px;
+  height: auto;
 }
 .product-card {
   max-height: 250px;
 }
 .basket-container {
   height: calc(100vh - 180px);
-  width: 50%;
+  max-width: 650px;
   overflow: auto;
 }
 .product-container {
@@ -37,4 +39,8 @@
     left: 8px;
     bottom: 1px
   }
+}
+.basket-amount-input {
+  min-width: 50px;
+  max-width: 75px;
 }

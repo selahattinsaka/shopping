@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     productTotal() {
-      return this.$store.state.cart || JSON.parse(localStorage.getItem('cart'));
+      return (this.$store.state.cart.length && this.$store.state.cart) || JSON.parse(localStorage.getItem('cart'));
     },
   },
   created() {

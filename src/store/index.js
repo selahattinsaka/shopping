@@ -9,6 +9,7 @@ export default new Vuex.Store({
   },
   mutations: {
     addToCart(state, product) {
+      state.cart = JSON.parse(localStorage.getItem('cart')) ? JSON.parse(localStorage.getItem('cart')) : [];
       const item = state.cart.find((el) => el.id === product.id);
       if (item) {
         item.quantity += 1;
@@ -19,6 +20,7 @@ export default new Vuex.Store({
       localStorage.setItem('cart', JSON.stringify(state.cart));
     },
     removeFromCart(state, product) {
+      state.cart = JSON.parse(localStorage.getItem('cart')) ? JSON.parse(localStorage.getItem('cart')) : [];
       const item = state.cart.find((el) => el.id === product.id);
       if (item) {
         state.cart = state.cart.filter((e) => e.id !== product.id);
@@ -26,11 +28,13 @@ export default new Vuex.Store({
       localStorage.setItem('cart', JSON.stringify(state.cart));
     },
     decreaseQuantity(state, product) {
+      state.cart = JSON.parse(localStorage.getItem('cart')) ? JSON.parse(localStorage.getItem('cart')) : [];
       const item = state.cart.find((el) => el.id === product.id);
       item.quantity -= 1;
       localStorage.setItem('cart', JSON.stringify(state.cart));
     },
     increaseQuantity(state, product) {
+      state.cart = JSON.parse(localStorage.getItem('cart')) ? JSON.parse(localStorage.getItem('cart')) : [];
       const item = state.cart.find((el) => el.id === product.id);
       item.quantity += 1;
       localStorage.setItem('cart', JSON.stringify(state.cart));
