@@ -82,7 +82,6 @@ header {
   transition: 0.5s ease all;
   color: #fff;
     nav {
-    // position: relative;
     display: flex;
     flex-direction: row;
     padding: 12px 0;

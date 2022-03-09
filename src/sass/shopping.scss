@@ -3,17 +3,13 @@
   max-width: 130px;
   height: auto;
 }
-.product-card {
-  max-height: 250px;
-}
-.basket-container {
-  height: calc(100vh - 180px);
-  max-width: 650px;
-  overflow: auto;
-}
 .product-container {
   height: calc(100vh - 110px);
   overflow: auto;
+}
+.product-font {
+  font-size: $font-size-normal;
+  font-weight: 300;
 }
 .basket-remove {
   cursor: pointer;
@@ -23,6 +19,11 @@
 }
 .clicked-link {
   color: #00afea !important;
+}
+.basket-container {
+  height: calc(100vh - 180px);
+  max-width: 650px;
+  overflow: auto;
 }
 .basket-list-button {
   position: relative;
