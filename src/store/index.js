@@ -28,10 +28,8 @@ export default new Vuex.Store({
     },
     removeFromCart(state, product) {
       state.cart = JSON.parse(localStorage.getItem('cart')) ? JSON.parse(localStorage.getItem('cart')) : [];
-      const item = state.cart.find((el) => el.id === product.id);
-      if (item) {
-        state.cart = state.cart.filter((e) => e.id !== product.id);
-      }
+      state.cart = state.cart.filter((e) => e.id !== product.id);
+
       localStorage.setItem('cart', JSON.stringify(state.cart));
     },
     decreaseQuantity(state, product) {

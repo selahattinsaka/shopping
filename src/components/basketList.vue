@@ -36,7 +36,7 @@
         Siparişiniz Oluşturuldu. Ana Sayfaya Yönlendiriliyorsunuz.
       </h3>
     </div>
-    <div v-if="!products && !orderGiven">
+    <div v-if="!(products || orderGiven)">
       <h3 class="text-center mt-4">
         Sepet Boş
       </h3>
@@ -74,7 +74,13 @@ export default {
   },
   methods: {
     removeProduct(product) {
-      this.$store.commit('removeFromCart', product);
+      if (this.products.length === 1) {
+        localStorage.setItem('cart', null);
+        this.$store.commit('removeAllItems', []);
+        this.changeSelectedMenu('Home');
+      } else {
+        this.$store.commit('removeFromCart', product);
+      }
       this.$snotify.success('Ürün Sepetten Kaldırıldı');
     },
     decreaseQuantity(product) {
