@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <navbar @rerender-page="rerender"/>
-    <router-view/>
+    <router-view :key="componentKey"/>
     <vue-snotify/>
   </div>
 </template>

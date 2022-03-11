@@ -21,9 +21,11 @@
 
 <script>
 import axios from 'axios';
+import routerSet from '../mixins/common';
 
 export default {
   name: 'ProductsList',
+  mixins: [routerSet],
   data() {
     return {
       baseUrl: 'http://localhost:3001/productsList',
@@ -44,7 +46,7 @@ export default {
     },
     async addToCart(product) {
       this.$store.commit('addToCart', product);
-      this.$router.push({ name: 'Basket' });
+      this.changeSelectedMenu('Basket');
       this.$snotify.success('Ürün Sepete Eklendi');
     },
   },

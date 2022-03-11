@@ -33,20 +33,24 @@ export default {
       mobile: undefined,
       mobileNav: undefined,
       windowWidth: undefined,
-      routerList: [
-        { routeName: 'Home', name: 'Products', isActive: true },
-        { routeName: 'Basket', name: 'My Cart', isActive: false },
-      ],
     };
   },
   computed: {
     productTotal() {
       return (this.$store.state.cart.length && this.$store.state.cart) || JSON.parse(localStorage.getItem('cart'));
     },
+    routerList() {
+      return this.$store.state.navbarList;
+    },
   },
   created() {
     window.addEventListener('resize', this.checkScreen);
     this.checkScreen();
+  },
+  mounted() {
+    if (localStorage.getItem('selected-navbar-menu')) {
+      this.$store.commit('controlNavbar');
+    }
   },
   methods: {
     checkNavBar(selected) {
@@ -56,6 +60,7 @@ export default {
         temp.isActive = false;
       });
       temp1.isActive = true;
+      localStorage.setItem('selected-navbar-menu', JSON.stringify(selected.routeName));
     },
     toggleMobile() {
       this.mobileNav = !this.mobileNav;
