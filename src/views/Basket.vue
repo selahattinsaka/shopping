@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <basket-list/>
-  </div>
+  <basket-list/>
 </template>
 
 <script>

@@ -29,7 +29,6 @@ export default {
   name: 'navbar',
   data() {
     return {
-      scroolPosition: undefined,
       mobile: undefined,
       mobileNav: undefined,
       windowWidth: undefined,
@@ -54,12 +53,12 @@ export default {
   },
   methods: {
     checkNavBar(selected) {
-      const temp1 = selected;
+      const selectedItem = selected;
       this.routerList.forEach((el) => {
         const temp = el;
         temp.isActive = false;
       });
-      temp1.isActive = true;
+      selectedItem.isActive = true;
       localStorage.setItem('selected-navbar-menu', JSON.stringify(selected.routeName));
     },
     toggleMobile() {

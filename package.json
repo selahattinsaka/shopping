@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "db:serve": "json-server --watch db.json --port=3001 & vue-cli-service serve ",
-    "generate": "json-server './src/db/generate'",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
