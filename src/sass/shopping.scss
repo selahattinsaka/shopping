@@ -1,0 +1,51 @@
+.img-size {
+  width: 100%;
+  max-width: 130px;
+  height: auto;
+}
+.product-container {
+  height: calc(100vh - 110px);
+  overflow: auto;
+}
+.product-font {
+  font-size: $font-size-normal;
+  font-weight: 300;
+}
+.basket-remove {
+  cursor: pointer;
+  &:hover {
+    color: red;
+  }
+}
+.clicked-link {
+  color: #00afea !important;
+}
+.basket-container {
+  height: calc(100vh - 180px);
+  overflow: auto;
+}
+.basket-list-button {
+  position: relative;
+  border-radius: 50% !important;
+  background-color: #F8F9F9 !important;
+  border-color: #E5E7E9 !important;
+  width: 25px;
+  height: 25px;
+  .increase-button {
+    left: 8px;
+    bottom: 1px
+  }
+  .decrease-button {
+    left: 9px;
+    bottom: 1px
+  }
+}
+.basket-amount-input {
+  min-width: 50px;
+  max-width: 75px;
+}
+.basket-back-icon {
+  color: grey;
+  height: 0.75rem;
+  margin-bottom: 1px;
+}
