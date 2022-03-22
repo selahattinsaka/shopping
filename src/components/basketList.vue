@@ -73,7 +73,7 @@ export default {
       return (this.$store.state.cart.length && this.$store.state.cart) || JSON.parse(localStorage.getItem('cart'));
     },
     totalAmount() {
-      return (this.$store.state.cart || JSON.parse(localStorage.getItem('cart'))).reduce((acc, current) => {
+      return this.products.reduce((acc, current) => {
         acc += Number(current.price); // eslint-disable-line
         return acc;
       }, 0);
