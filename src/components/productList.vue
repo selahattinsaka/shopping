@@ -28,7 +28,7 @@ export default {
   mixins: [routerSet],
   data() {
     return {
-      baseUrl: 'http://localhost:3001/productsList',
+      baseUrl: 'https://nonchalant-fang.glitch.me/listing',
       productsList: [],
     };
   },

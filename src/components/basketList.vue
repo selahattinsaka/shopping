@@ -64,7 +64,7 @@ export default {
   mixins: [routeSet],
   data() {
     return {
-      baseUrl: 'http://localhost:3001/ordered',
+      baseUrl: 'https://nonchalant-fang.glitch.me/order',
       orderGiven: false,
     };
   },
@@ -98,23 +98,18 @@ export default {
     },
     async giveOrder() {
       const payload = JSON.parse(localStorage.getItem('cart')).map((el) => ({ id: el.id, quantity: el.quantity }));
-      const foundItem = JSON.parse(localStorage.getItem('cart')).find((el) => el.id === 3);
-      if (foundItem) {
-        this.$snotify.error(`${foundItem.name} stokta yok`);
-      } else {
-        try {
-          await axios.post(this.baseUrl, payload);
-          this.$snotify.success('Siparişiniz Verildi');
-          this.orderGiven = true;
-          localStorage.setItem('cart', null);
-          this.$store.commit('removeAllItems', []);
-          setTimeout(() => {
-            this.changeSelectedMenu('Home');
-            this.orderGiven = false;
-          }, 2000);
-        } catch (e) {
-          this.$snotify.error('Bir Hata Oluştu');
-        }
+      try {
+        await axios.post(this.baseUrl, payload);
+        this.$snotify.success('Siparişiniz Verildi');
+        this.orderGiven = true;
+        localStorage.setItem('cart', null);
+        this.$store.commit('removeAllItems', []);
+        setTimeout(() => {
+          this.changeSelectedMenu('Home');
+          this.orderGiven = false;
+        }, 2000);
+      } catch (error) {
+        this.$snotify.error(error.response.data.message);
       }
     },
   },
