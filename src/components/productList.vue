@@ -44,7 +44,7 @@ export default {
         this.$snotify.error('Bir Hata Oluştu');
       }
     },
-    async addToCart(product) {
+    addToCart(product) {
       this.$store.commit('addToCart', product);
       this.changeSelectedMenu('Basket');
       this.$snotify.success('Ürün Sepete Eklendi');

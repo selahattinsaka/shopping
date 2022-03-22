@@ -4,7 +4,7 @@
       <ul v-show="!mobile" class="navigation">
         <li v-for="el in routerList" :key="el.id" @click="checkNavBar(el)">
           <router-link class="link" :class="{'clicked-link': el.isActive}" :to="{ name: el.routeName}">
-            {{el.name}} {{el.routeName === 'Basket' ? productTotal ? `( ${productTotal.length} )` : '( 0 )' : ''}}
+            {{el.name}} {{(el.routeName === 'Basket') ? productTotal ? `( ${productTotal.length} )` : '( 0 )' : ''}} <!-- -->
           </router-link>
         </li>
       </ul>
@@ -31,7 +31,6 @@ export default {
     return {
       mobile: undefined,
       mobileNav: undefined,
-      windowWidth: undefined,
     };
   },
   computed: {
@@ -65,8 +64,7 @@ export default {
       this.mobileNav = !this.mobileNav;
     },
     checkScreen() {
-      this.windowWidth = window.innerWidth;
-      if (this.windowWidth <= 750) {
+      if (window.innerWidth <= 750) {
         this.mobile = true;
       } else {
         this.mobile = false;
@@ -83,18 +81,11 @@ header {
   z-index: 99;
   width: 100%;
   position: relative;
-  transition: 0.5s ease all;
   color: #fff;
     nav {
-    display: flex;
-    flex-direction: row;
     padding: 12px 0;
-    transition: .5s ease all;
     width: 90%;
     margin: 0 auto;
-    @media(min-width: 1140px) {
-      max-width: 1140px;
-    }
       ul,
       .link {
         font-weight: 500;

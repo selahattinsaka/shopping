@@ -30,6 +30,7 @@
           </div>
         </div>
       </div>
+      <div class="text-center">Toplam Fiyat: {{totalAmount}}</div>
     </div>
     <div v-if="orderGiven && !product">
       <h3 class="text-center mt-4">
@@ -70,6 +71,12 @@ export default {
   computed: {
     products() {
       return (this.$store.state.cart.length && this.$store.state.cart) || JSON.parse(localStorage.getItem('cart'));
+    },
+    totalAmount() {
+      return (this.$store.state.cart || JSON.parse(localStorage.getItem('cart'))).reduce((acc, current) => {
+        acc += Number(current.price); // eslint-disable-line
+        return acc;
+      }, 0);
     },
   },
   methods: {
